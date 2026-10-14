@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Christmas List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf6ee;--ink:#1c2a22;--soft:#4f6056;--panel:#fff;--line:#e3d9c6;--stage:#eaf3ec;--red:#c8102e;--accent:#b50e29;--green:#165b33;--holly:#0d3b26;--gold:#e8b23a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0b2217;--ink:#f4efe4;--soft:#b8c8bb;--panel:#12352a;--line:#2b5242;--stage:#0a1d14;--accent:#ff7482}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0b2217;--ink:#f4efe4;--soft:#b8c8bb;--panel:#12352a;--line:#2b5242;--stage:#0a1d14;--accent:#ff7482}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Nunito,system-ui,sans-serif}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.cane{height:14px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#fff 14px 28px)}
+.hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:72px 20px 84px;background:radial-gradient(ellipse at 50% 0,#1d7a46,var(--holly) 70%)}
+#snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero>*:not(canvas){position:relative}
+.hero h1{font:700 clamp(46px,9vw,92px)/1.05 'Mountains of Christmas',Georgia,serif;margin:0 0 12px;text-shadow:0 4px 0 var(--red)}
+.hero p{max-width:34ch;margin:0 auto 22px;font-size:20px}
+.pill{display:inline-block;background:var(--red);color:#fff;font-weight:800;padding:7px 18px;border-radius:99px;border:2px dashed #fff}
+.jump{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--gold);color:#2a1a00;font-weight:800;text-decoration:none;padding:11px 22px;border-radius:10px}
+.btn.alt{background:transparent;color:#fff;border:2px solid #fff}
+main{max-width:1080px;margin:0 auto;padding:0 20px}
+.item{padding:64px 0 24px}
+.item+.item{border-top:3px dotted var(--line)}
+.row{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+.item.flip .row{grid-template-columns:1fr 1.1fr}.item.flip .stage{order:2}
+.stage{position:relative;aspect-ratio:4/3;background:radial-gradient(circle at 50% 40%,var(--stage),transparent 75%),var(--stage);border:3px solid var(--green);border-radius:18px;overflow:hidden;cursor:grab}
+.stage:active{cursor:grabbing}.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y}
+.tag{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-weight:800;font-size:14px;padding:4px 12px;border-radius:4px 14px 14px 4px;z-index:1}
+.hint{position:absolute;bottom:8px;right:12px;font-size:13px;color:var(--soft)}
+.fallback{padding:30px;color:var(--soft)}
+h2{font:700 clamp(30px,5vw,46px)/1.1 'Mountains of Christmas',Georgia,serif;color:var(--accent);margin:0 0 6px}
+.sub{font-weight:700;color:var(--green);margin:0 0 14px}
+:root:not([data-theme="light"]) .sub{color:#7fd9a1}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:18px 0;padding:14px 16px;background:var(--panel);border-left:5px solid var(--red);border-radius:6px}
+dt{font-weight:800}dd{margin:0;color:var(--soft)}
+.rev{margin-top:34px}
+.rev h3{font:700 28px 'Mountains of Christmas',Georgia,serif;margin:0 0 12px;color:var(--green)}
+:root:not([data-theme="light"]) .rev h3{color:#7fd9a1}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+article{background:var(--panel);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:8px;padding:16px 18px}
+article:nth-child(even){border-top-color:var(--red)}
+article h4{margin:0 0 6px;font-size:17px}article p{margin:0;color:var(--soft);font-size:16px}
+.score{font-weight:800;font-size:18px;margin:0 0 12px}
+footer{margin-top:56px;padding:28px 20px 40px;text-align:center;color:#fff;background:var(--holly);font-size:15px}
+footer p{max-width:60ch;margin:6px auto}
+@media(max-width:800px){.row,.item.flip .row{grid-template-columns:1fr}.item.flip .stage{order:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.stage{cursor:default}
+.gift{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.big{font:700 clamp(40px,7vw,60px)/1 'Mountains of Christmas',Georgia,serif;color:var(--accent)}.mini{color:var(--soft);font-weight:700}
+.lights{height:36px;background:radial-gradient(circle at 12px 18px,#ff3b4e 0 7px,transparent 8px) 0 0/80px 36px,radial-gradient(circle at 32px 18px,var(--gold) 0 7px,transparent 8px) 0 0/80px 36px,radial-gradient(circle at 52px 18px,#2fbf71 0 7px,transparent 8px) 0 0/80px 36px,var(--holly);animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{filter:brightness(1.6)}}@media(prefers-reduced-motion:reduce){.lights{animation:none}}
+.cd{display:flex;gap:10px;justify-content:center;margin-top:12px}.cd div{background:rgba(255,255,255,.12);border:2px solid #fff;border-radius:10px;padding:8px 12px;min-width:70px}
+.cd b{display:block;font:700 34px 'Mountains of Christmas',Georgia,serif}.cd small{font-size:13px}
+.letter{margin:48px auto 0;max-width:640px;padding:28px 32px;background:var(--panel);border:2px dashed var(--red);border-radius:12px;transform:rotate(-.6deg)}
+.letter h2{margin-bottom:10px}.letter p{margin:0 0 10px}.sign{font-weight:800}.nice{float:right;background:var(--green);color:#fff;padding:2px 12px;border-radius:99px;font-size:14px}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}.pc h5{margin:0 0 4px;font-size:16px;color:var(--accent)}.pc ul{margin:0;padding-left:18px;color:var(--soft);font-size:15px}
+.bill{width:100%;max-width:640px;border-collapse:collapse;background:var(--panel);margin:18px 0 8px}.bill th,.bill td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.bill input{width:110px;font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.bill tfoot td{font:700 28px 'Mountains of Christmas',Georgia,serif;color:var(--accent);border:0;background:var(--stage)}
+.note{color:var(--soft);font-size:15px;max-width:60ch}.order{background:var(--red);color:#fff;font-size:20px;padding:14px 28px;margin:8px 0}
+.chk{list-style:none;padding:0;margin:0;display:grid;gap:8px}.chk input{width:20px;height:20px;accent-color:var(--green);vertical-align:-4px;margin-right:8px}
+@media(max-width:600px){.pc{grid-template-columns:1fr}.cd div{min-width:60px;padding:8px}}
+.tree{display:block;margin:0 auto 8px}.star{animation:st 1.8s ease-in-out infinite}@keyframes st{50%{opacity:.45}}
+.gift{cursor:pointer}.lid{transition:transform .5s;transform-origin:10px 46px}.gift.open .lid{transform:translate(-8px,-28px) rotate(-14deg)}
+.reveal{opacity:0;height:0;font-weight:800;color:var(--ink);transition:opacity .4s}.gift.open .reveal{opacity:1;height:auto}
+article ol{margin:0;padding-left:20px;color:var(--soft);font-size:16px}article li{margin-bottom:6px}
+@media(prefers-reduced-motion:reduce){.star{animation:none}.lid,.reveal{transition:none}}
+.buy{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}.buy .order{margin:0}
+html{-webkit-text-size-adjust:100%}
+.pap{display:inline-block;background:var(--gold);color:#2a1a00;font:800 14px/1.3 Nunito,system-ui,sans-serif;padding:4px 12px;border-radius:99px;vertical-align:middle;margin:4px 0 0 6px}
+.trade{display:grid;grid-template-columns:1fr auto;gap:6px 16px;max-width:440px;margin:16px 0 8px;padding:14px 16px;background:var(--panel);border-left:5px solid var(--gold);border-radius:6px}
+.trade .net{font-weight:800;font-size:20px;color:var(--accent);border-top:2px solid var(--line);padding-top:6px}
+.bill .alt2 td{font-size:20px}
+@media(max-width:600px){body{font-size:16px}main{padding:0 16px}.hero{padding:44px 16px 52px}.hero p{font-size:18px}.jump{flex-direction:column;align-items:stretch}.jump .btn,.buy .btn{text-align:center}.item{padding:40px 0 16px}.stage{aspect-ratio:auto;min-height:270px;padding:48px 12px 30px}.letter{transform:none;padding:20px}.bill th,.bill td{padding:10px 8px;font-size:15px}.bill input{width:92px}.bill tfoot td{font-size:22px}.bill .alt2 td{font-size:17px}.buy{flex-direction:column}.btn{min-height:44px}.cd{gap:6px}.cd div{min-width:0;flex:1;padding:6px 4px}.cd b{font-size:26px}dl{grid-template-columns:1fr;gap:0}dt{margin-top:8px}.rev h3{font-size:24px}.pap{margin-left:0}.trade{max-width:none}}
+</style>
+</head>
+<body>
+<div class="cane"></div>
+<header class="hero">
+<canvas id="snow" aria-hidden="true"></canvas>
+<svg class="tree" viewBox="0 0 100 112" width="84" aria-hidden="true"><polygon class="star" points="50,2 54,14 67,14 57,22 61,35 50,27 39,35 43,22 33,14 46,14" fill="#e8b23a"/><polygon points="50,24 78,64 22,64" fill="#2fbf71"/><polygon points="50,44 88,92 12,92" fill="#1d9a58"/><rect x="44" y="92" width="12" height="16" fill="#7a4a21"/><circle cx="42" cy="62" r="4" fill="#ff3b4e"/><circle cx="60" cy="52" r="4" fill="#e8b23a"/><circle cx="30" cy="84" r="4.5" fill="#fff"/><circle cx="62" cy="80" r="4.5" fill="#ff3b4e"/><circle cx="76" cy="88" r="4" fill="#e8b23a"/></svg>
+<h1>My Christmas List</h1>
+<p>Three shiny things I'd love to find under the tree this year.</p>
+<span class="pill">Until Christmas Day</span>
+<div class="cd" id="cd"><div><b>0</b><small>days</small></div><div><b>0</b><small>hours</small></div><div><b>0</b><small>mins</small></div><div><b>0</b><small>secs</small></div></div>
+<div class="jump"><a class="btn" href="#monitor">The monitor</a><a class="btn alt" href="#keyboard">The keyboard</a><a class="btn alt" href="#iphone">The iPhone</a><a class="btn alt" href="#order">Total: <span id="htot"></span></a></div>
+</header>
+<div class="cane"></div>
+<div class="lights" aria-hidden="true"></div>
+<main>
+<section class="letter"><h2>Merry Christmas!</h2>
+<p>Here's what I'm hoping to unwrap this year: a monitor that keeps up with every flick, a keyboard that reacts the instant I press a key and a shiny new iPhone. Everything comes with a price, and there's a total and order form below. Tap a gift to unwrap it.</p></section>
+
+<section class="item" id="monitor">
+<div class="row">
+<div class="stage gift" role="button" tabindex="0" aria-pressed="false" aria-label="Unwrap BenQ ZOWIE XL2566X+"><span class="tag">Wish 1</span>
+<svg viewBox="0 0 120 120" width="150" aria-hidden="true"><rect x="15" y="50" width="90" height="60" fill="#c8102e"/><rect x="53" y="50" width="14" height="60" fill="#e8b23a"/><g class="lid"><rect x="10" y="38" width="100" height="16" rx="3" fill="#c8102e"/><rect x="53" y="38" width="14" height="16" fill="#e8b23a"/><path d="M60 38C40 6 18 22 40 38M60 38C80 6 102 22 80 38" fill="none" stroke="#e8b23a" stroke-width="7" stroke-linecap="round"/></g></svg>
+<div class="big" data-p></div><div class="mini">BenQ ZOWIE XL2566X+</div><div class="reveal">Unwrapped: 400 Hz of smooth motion</div><span class="hint">Tap to unwrap</span></div>
+<div>
+<h2>BenQ ZOWIE XL2566X+</h2>
+<p class="sub">The 400 Hz esports monitor</p>
+<p>A 24-inch, 1080p monitor built for one job: making fast shooters look as clear and smooth as possible. Its Fast TN panel runs at 400 Hz, and ZOWIE's DyAc 2 backlight strobing cuts motion blur so moving targets stay sharp. It comes with a height-adjustable PROGamer stand, a removable shielding hood and the S Switch controller for swapping settings quickly.</p>
+<dl>
+<dt>Screen</dt><dd>24.1&Prime; Full HD, Fast TN, 400 Hz</dd>
+<dt>Motion</dt><dd>DyAc 2 strobing backlight</dd>
+<dt>Inputs</dt><dd>3&times; HDMI 2.0, DisplayPort 1.4, headphone out</dd>
+<dt>Extras</dt><dd>S Switch, shielding hood, XL Setting to Share</dd>
+</dl>
+<div class="pc"><div><h5>Why it's great</h5><ul><li>Very smooth 400 Hz with sharp motion</li><li>Sturdy height-adjustable stand and shielding hood</li><li>DisplayPort cable in the box</li></ul></div><div><h5>Worth knowing</h5><ul><li>TN colours trail OLED and IPS</li><li>Strobing lowers brightness</li><li>Limited gamma options</li></ul></div></div>
+<a class="btn" href="https://www.amazon.co.uk/BenQ-XL2566X-Monitor-Shielding-Adjustment/dp/B0D5QX3LVV" target="_blank" rel="noopener">See it on Amazon UK</a>
+</div></div>
+<div class="rev">
+<h3>What reviewers say</h3>
+<p class="score">4.7 / 5 from 764 shopper ratings on PcComponentes (95% would recommend)</p>
+<div class="cards">
+<article><h4><a href="https://dotesports.com/hardware/reviews/zowie-xl2566x-400hz-gaming-monitor-review" target="_blank" rel="noopener">Dot Esports</a></h4><p>Calls it one of the best esports monitors. Colours are clearly better than ZOWIE's older 144 Hz model, though it won't match an OLED, and the reviewer happily uses it for everyday work too.</p></article>
+<article><h4><a href="https://www.3dtested.com/monitors/gaming-monitors/benq-zowie-xl2566x-400-hz-25-inch-gaming-monitor-review/5" target="_blank" rel="noopener">3DTested</a></h4><p>Praises the DyAc 2 strobe and the premium stand with position markings. It costs well under a comparable OLED, but the gamma options are a letdown and TN is showing its age.</p></article>
+<article><h4><a href="https://www.businesstoday.in/technology/news/story/benq-zowie-xl2566x-gaming-monitor-review-who-is-it-for-515710-2026-02-11" target="_blank" rel="noopener">Business Today</a></h4><p>Finds the new TN panel more colourful than earlier ZOWIE models, and football stayed sharp in fast pans. The verdict: superb for competitive play, not a general-purpose screen.</p></article>
+<article><h4>PcComponentes shoppers</h4><p>Owners love the smoothness, DyAc and the S Switch profiles. The common trade-offs are weaker TN colours and a dimmer picture when strobing is on.</p></article>
+</div></div>
+</section>
+
+<section class="item flip" id="keyboard">
+<div class="row">
+<div class="stage gift" role="button" tabindex="0" aria-pressed="false" aria-label="Unwrap SteelSeries Apex Pro TKL Gen 3"><span class="tag">Wish 2</span>
+<svg viewBox="0 0 120 120" width="150" aria-hidden="true"><rect x="15" y="50" width="90" height="60" fill="#165b33"/><rect x="53" y="50" width="14" height="60" fill="#c8102e"/><g class="lid"><rect x="10" y="38" width="100" height="16" rx="3" fill="#165b33"/><rect x="53" y="38" width="14" height="16" fill="#c8102e"/><path d="M60 38C40 6 18 22 40 38M60 38C80 6 102 22 80 38" fill="none" stroke="#c8102e" stroke-width="7" stroke-linecap="round"/></g></svg>
+<div class="big" data-p></div><div class="mini">SteelSeries Apex Pro TKL Gen 3</div><div class="reveal">Unwrapped: keys that react instantly</div><span class="hint">Tap to unwrap</span></div>
+<div>
+<h2>SteelSeries Apex Pro TKL Gen 3</h2>
+<p class="sub">The keyboard with adjustable keys</p>
+<p>A wired, tenkeyless gaming keyboard with OmniPoint 3.0 magnetic switches, so you can choose how far each key must travel before it registers. Rapid Trigger makes keys reset instantly, a small OLED screen shows settings at a glance, and a magnetic wrist rest comes in the box. Everything is set up in the free SteelSeries GG software, with RGB lighting per key.</p>
+<dl>
+<dt>Layout</dt><dd>TKL, English (UK) layout</dd>
+<dt>Switches</dt><dd>OmniPoint 3.0 Hall effect, adjustable</dd>
+<dt>Connection</dt><dd>Wired USB-C</dd>
+<dt>Extras</dt><dd>OLED display, Rapid Trigger, wrist rest</dd>
+</dl>
+<div class="pc"><div><h5>Why it's great</h5><ul><li>Adjustable magnetic switches with Rapid Trigger</li><li>Premium build, OLED screen and wrist rest</li><li>Top-tier gaming responsiveness</li></ul></div><div><h5>Worth knowing</h5><ul><li>Expensive for a tenkeyless board</li><li>Wired only, no USB passthrough</li><li>Some find it less nice for typing</li></ul></div></div>
+<a class="btn" href="https://steelseries.com/en-gb/gaming-keyboards/apex-pro-gen-3?connectivityType=wired&color=cyber&keyboardSize=tkl&keyboardLanguage=english" target="_blank" rel="noopener">See it at SteelSeries</a>
+</div></div>
+<div class="rev">
+<h3>What reviewers say</h3>
+<div class="cards">
+<article><h4><a href="https://www.techradar.com/computing/keyboards/steelseries-apex-pro-tkl-gen-3-review" target="_blank" rel="noopener">TechRadar</a></h4><p>Build quality and gaming performance are the highlights and it's a joy to use. It's expensive at £209, and they found it less appealing for typing than for gaming.</p></article>
+<article><h4><a href="https://www.inkl.com/news/steelseries-apex-pro-tkl-gen-3-review" target="_blank" rel="noopener">PC Gamer</a></h4><p>Pricey for the size, with no wireless mode or USB passthrough. Even so, the aluminium top, switches, OLED and software add up to a true enthusiast keyboard.</p></article>
+<article><h4><a href="https://prosettings.net/reviews/steelseries-apex-pro-gen-3/" target="_blank" rel="noopener">ProSettings</a></h4><p>Still one of the best mainstream gaming boards; the tester couldn't notice any latency difference against today's top models. The case is plastic, and setup happens in GG.</p></article>
+<article><h4><a href="https://www.cgmagonline.com/review/hardware/steelseries-apex-pro-gen-3-tkl-keyboard" target="_blank" rel="noopener">CGMagazine</a></h4><p>Rates the typing feel among the best they've used, backed by Rapid Trigger and a smooth, weighted feel. Their verdict is that it's a no-brainer for a feature-packed keyboard.</p></article>
+</div></div>
+</section>
+<section class="item" id="iphone">
+<div class="row">
+<div class="stage gift" role="button" tabindex="0" aria-pressed="false" aria-label="Unwrap iPhone 18 Pro"><span class="tag">Wish 3</span>
+<svg viewBox="0 0 120 120" width="150" aria-hidden="true"><rect x="15" y="50" width="90" height="60" fill="#e8b23a"/><rect x="53" y="50" width="14" height="60" fill="#c8102e"/><g class="lid"><rect x="10" y="38" width="100" height="16" rx="3" fill="#e8b23a"/><rect x="53" y="38" width="14" height="16" fill="#c8102e"/><path d="M60 38C40 6 18 22 40 38M60 38C80 6 102 22 80 38" fill="none" stroke="#c8102e" stroke-width="7" stroke-linecap="round"/></g></svg>
+<div class="big" data-p></div><div class="mini">iPhone 18 Pro, after trade-in</div><div class="reveal">Unwrapped: a brand new A20 Pro iPhone</div><span class="hint">Tap to unwrap</span></div>
+<div>
+<h2>iPhone 18 Pro <span class="pap">Pap will probably get this for me</span></h2>
+<p class="sub">Apple's new Pro iPhone</p>
+<p>Apple's new Pro iPhone, with a 6.3-inch ProMotion display, the A20 Pro chip and a 48MP main camera with variable aperture. Apple promises a big leap in battery life, and it went on sale in the UK on 18 September 2026.</p>
+<dl><dt>Screen</dt><dd>6.3-inch Super Retina XDR, 120Hz</dd><dt>Chip</dt><dd>A20 Pro</dd><dt>Storage</dt><dd>256GB, 512GB, 1TB or 2TB</dd><dt>Colours</dt><dd>Black, Silver, Glacier, Burgundy</dd></dl>
+<div class="trade"><span>iPhone 18 Pro 256GB</span><span id="tp"></span><span>Trade in iPhone 16 Plus (up to)</span><span id="tt"></span><span class="net">After trade-in</span><span class="net" id="tn"></span></div>
+<p class="note">The trade-in is Apple's UK estimate of up to &pound;410 for an iPhone 16 Plus as of 28 September 2026 (<a href="https://shouldiupgrade.app/iphone-trade-in-value" target="_blank" rel="noopener">source</a>). The final offer depends on your phone's condition.</p>
+<a class="btn" href="https://www.apple.com/uk/shop/buy-iphone/iphone-18-pro" target="_blank" rel="noopener">See it at Apple UK</a>
+</div></div></section>
+<section class="item" id="setup">
+<h2>Christmas morning set-up</h2>
+<p class="sub">First things to do once they're unwrapped</p>
+<div class="cards">
+<article><h4>BenQ ZOWIE XL2566X+</h4><ol><li>Connect it with the DisplayPort cable from the box so it can reach full speed.</li><li>Set the refresh rate to 400 Hz in your display settings.</li><li>Open the monitor menu and try the DyAc 2 motion setting.</li></ol></article>
+<article><h4>SteelSeries Apex Pro TKL Gen 3</h4><ol><li>Plug it in; reviewers found it works straight away.</li><li>Download the free SteelSeries GG software.</li><li>Tune how far each key must travel and set up Rapid Trigger.</li></ol></article>
+<article><h4>iPhone 18 Pro</h4><ol><li>Back up your iPhone 16 Plus.</li><li>Set up the new phone and move your data across.</li><li>Sign out of the old phone, then trade it in.</li></ol></article>
+</div></section>
+<section class="item" id="facts">
+<h2>Christmas fun facts</h2>
+<p class="sub">Little bits of festive trivia</p>
+<div class="cards">
+<article><h4>The first Christmas card</h4><p>The first commercial Christmas card was sent in London in 1843.</p></article>
+<article><h4>Crackers</h4><p>Christmas crackers were invented by a London sweet maker, Tom Smith, in the 1840s.</p></article>
+<article><h4>Silver tinsel</h4><p>Tinsel was originally made from real silver before cheaper metals replaced it.</p></article>
+<article><h4>Trees in Britain</h4><p>Queen Victoria and Prince Albert helped make Christmas trees popular in Britain.</p></article>
+</div></section>
+<section class="item" id="order">
+<h2>Order form</h2>
+<p class="sub">Everything on my list in one basket</p>
+<table class="bill"><thead><tr><th>Gift</th><th>Price</th></tr></thead><tbody>
+<tr><td>BenQ ZOWIE XL2566X+ monitor</td><td><label>&pound; <input id="pr0" type="number" min="0" step="0.01" value="519.99"></label></td></tr>
+<tr><td>SteelSeries Apex Pro TKL Gen 3 keyboard</td><td><label>&pound; <input id="pr1" type="number" min="0" step="0.01" value="219.99"></label></td></tr>
+<tr><td>iPhone 18 Pro 256GB <span class="pap">Pap will probably get this for me</span></td><td><label>&pound; <input id="pr2" type="number" min="0" step="0.01" value="1199"></label></td></tr>
+<tr><td>Trade-in: iPhone 16 Plus (up to)</td><td><label>&minus;&pound; <input id="pr3" type="number" min="0" step="0.01" value="410"></label></td></tr></tbody>
+<tfoot><tr><td>Total cost, iPhone after trade-in</td><td id="tot"></td></tr><tr class="alt2"><td>Without the iPhone</td><td id="tot2"></td></tr></tfoot></table>
+<p class="note">The monitor and keyboard prices come from Amazon UK listings I found on 14 October 2026, and the iPhone price is Apple UK's. Prices change often, so edit them here if they differ.</p>
+<div class="buy"><a class="btn order" href="https://www.amazon.co.uk/BenQ-XL2566X-Monitor-Shielding-Adjustment/dp/B0D5QX3LVV" target="_blank" rel="noopener">Buy the monitor on Amazon UK</a><a class="btn order" href="https://www.amazon.co.uk/SteelSeries-Apex-Pro-TKL-Gen/dp/B0DGZLHN8G" target="_blank" rel="noopener">Buy the keyboard on Amazon UK</a><a class="btn order" href="https://www.apple.com/uk/shop/buy-iphone/iphone-18-pro" target="_blank" rel="noopener">Buy the iPhone at Apple UK</a></div>
+<p class="note">Each button opens the product page, where you can add it to your basket. Check the keyboard is the wired, English-layout version before you pay.</p>
+<div class="rev"><h3>Christmas checklist</h3>
+<ul class="chk"><li><label><input type="checkbox"> Order placed</label></li><li><label><input type="checkbox"> Parcels arrived</label></li><li><label><input type="checkbox"> Wrapped</label></li><li><label><input type="checkbox"> Under the tree</label></li><li><label><input type="checkbox"> Opened on Christmas morning</label></li></ul></div>
+</section>
+</main>
+<footer>
+<p>Merry Christmas! Reviews above are my own short summaries of published reviews; follow the links to read them in full.</p>
+</footer>
+<div class="cane"></div>
+
+<script>
+(function(){var t=document.querySelectorAll('#cd b');function u(){var n=new Date(),y=n.getFullYear(),x=new Date(y,11,25);if(x-n<-864e5)x=new Date(y+1,11,25);var s=Math.max(0,Math.floor((x-n)/1e3));[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60].forEach(function(v,i){t[i].textContent=v})}u();setInterval(u,1000)})();
+(function(){var c=document.getElementById('snow'),x=c.getContext('2d');if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var w,h,f=[];function rs(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight}rs();addEventListener('resize',rs);
+for(var i=0;i<70;i++)f.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.5+1,s:Math.random()+.4,d:Math.random()*6});
+(function t(){x.clearRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.85)';
+f.forEach(function(p){p.y+=p.s;p.x+=Math.sin(p.y/40+p.d)*.5;if(p.y>h){p.y=-5;p.x=Math.random()*w}x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()});
+requestAnimationFrame(t)})()})();
+
+(function(){var g=function(k){return document.getElementById(k)},f=document.querySelectorAll('[data-p]');
+function fm(n){return '\u00a3'+n.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function v(k){return parseFloat(g(k).value)||0}
+function u(){var m=v('pr0'),b=v('pr1'),p=v('pr2'),t=v('pr3'),n=Math.max(0,p-t);
+f[0].textContent=fm(m);f[1].textContent=fm(b);f[2].textContent=fm(n);
+g('tp').textContent=fm(p);g('tt').textContent='-'+fm(t);g('tn').textContent=fm(n);
+g('tot').textContent=fm(m+b+n);g('tot2').textContent=fm(m+b);g('htot').textContent=fm(m+b+n)}
+['pr0','pr1','pr2','pr3'].forEach(function(k){g(k).addEventListener('input',u)});u()})();
+(function(){var c=document.querySelectorAll('.chk input'),K='xmas-checklist',s=[];try{s=JSON.parse(localStorage.getItem(K))||[]}catch(e){}
+c.forEach(function(e,i){e.checked=!!s[i];e.addEventListener('change',function(){var a=[].map.call(c,function(x){return x.checked});try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}})})})();
+document.querySelectorAll('.gift').forEach(function(g){function t(){var o=g.classList.toggle('open');g.setAttribute('aria-pressed',o);var h=g.querySelector('.hint');if(h)h.textContent=o?'Tap to wrap again':'Tap to unwrap'}g.addEventListener('click',t);g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
+</script>
+</body>
+</html>
